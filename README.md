@@ -76,7 +76,7 @@ Tizen APIs and media/DRM support vary by TV model and platform version. The comp
 
 Only analyze applications you own or are authorized to inspect. Do not use this project to extract credentials, tokens, private keys, or personal data; bypass DRM, subscription controls, or access restrictions; or redistribute proprietary source/assets. Keep APKs, certificates, device identifiers, and secrets out of Git history. Use test accounts and redact sensitive values from reports.
 
-## Current status
+## Karaoke MVP development\n\nThe first original Tizen karaoke MVP is under review in [PR #1](https://github.com/jrgodinez25/Android2Tizen/pull/1). See [MVP status](documentation/mvp-status.md), [device profile](documentation/device-profile.md), and [full roadmap](documentation/roadmap.md). The app currently uses original demo content and supports song selection, a reservation queue, local audio selection, and LRC cue synchronization subject to Samsung TV runtime validation.\n\n## Current status
 
 - [x] Repository scaffold and project documentation
 - [x] Safe, non-executing APK structure inspector
