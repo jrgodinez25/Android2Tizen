@@ -8,7 +8,6 @@
   <content src="index.html"/>
   <name>Karaoke TV</name>
   <description>Original karaoke player prototype for Samsung Tizen Smart TVs.</description>
-  <icon src="icon.png"/>
   <tizen:profile name="tv"/>
   <tizen:setting screen-orientation="landscape"
                  context-menu="disable"
