@@ -194,7 +194,7 @@
       var lines = String(reader.result || "").split(/\r?\n/);
       var cues = [];
       lines.forEach(function (line) {
-        var match = line.match(/^\\s*\\[(\\d{1,2}):(\\d{2})(?:[.:](\\d{1,3}))?\\](.*)$/);
+        var match = line.match(/^\s*\[(\d{1,2}):(\d{2})(?:[.:](\d{1,3}))?\](.*)$/);
         if (!match) return;
         var fraction = match[3] ? Number("0." + match[3]) : 0;
         cues.push({at: Number(match[1]) * 60 + Number(match[2]) + fraction, text: match[4].trim()});
