@@ -1,0 +1,45 @@
+# APKs and extracted application data
+*.apk
+*.apks
+*.xapk
+*.aab
+*.dex
+*.odex
+*.vdex
+*.oat
+*.so
+apk-analysis/decompiled/
+apk-analysis/resources/
+apk-analysis/native-libraries/
+apk-analysis/manifest/
+
+# Reports may contain identifying or proprietary metadata; review before committing
+apk-analysis/reports/*
+!apk-analysis/reports/.gitkeep
+apk-analysis/*.json
+
+# Signing material and secrets
+*.p12
+*.pfx
+*.pem
+*.key
+*.keystore
+*.jks
+.env
+.env.*
+!.env.example
+
+# Local development
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+dist/
+build/
+*.wgt
