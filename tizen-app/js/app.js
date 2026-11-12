@@ -33,7 +33,7 @@
     $("songList").innerHTML = "";
     filtered.forEach(function (song) {
       var button = document.createElement("button");
-      button.className = "song" + (selected && selected.number === song.number ? " selected" : "");
+      button.className = "song" + (selected && selected.number === song.number ? " selected" : "");\n      button.dataset.number = song.number;
       button.innerHTML = '<span class="song-number"></span><span class="song-meta"><strong></strong><small></small></span><span class="song-add">＋</span>';
       button.querySelector(".song-number").textContent = song.number;
       button.querySelector("strong").textContent = song.title;
@@ -176,7 +176,47 @@
     if (/^[0-9]$/.test(key) && document.activeElement.tagName !== "INPUT") {
       if (typed.length < 5) typed += key; updateNumber(); if (typed.length === 5) findNumber(); event.preventDefault(); return;
     }
-    if (key === "Enter" && document.activeElement.tagName !== "INPUT") { if (selected) reserveSelected(); event.preventDefault(); }
+    if (key === "Enter" && document.activeElement.tagName !== "INPUT") {
+      var focusedSong = document.activeElement.closest ? document.activeElement.closest(".song") : null;
+      if (focusedSong) {
+        var focusedMatch = songs.find(function (s) { return s.number === focusedSong.dataset.number; });
+        if (focusedMatch) selectSong(focusedMatch);
+      } else if (document.activeElement.id === "playBtn") {
+        if (playing) pausePlayback(); else if (pausedAt > 0 && $("stageMode").textContent === "PAUSED") resumePlayback(); else startPlayback();
+      } else if (document.activeElement.id === "reserveBtn") reserveSelected();
+      else if (document.activeElement.id === "nextBtn") nextSong();
+      else if (document.activeElement.id === "stopBtn") { pausedAt = 0; stopPlayback(); }
+      else if (document.activeElement.dataset && document.activeElement.dataset.digit !== undefined) {
+        if (typed.length < 5) typed += document.activeElement.dataset.digit;
+        updateNumber(); if (typed.length === 5) findNumber();
+      } else if (selected) reserveSelected();
+      event.preventDefault();
+    }
+    if (key === "ArrowDown" || key === "ArrowUp" || key === "ArrowLeft" || key === "ArrowRight") {
+      var focusables = Array.prototype.slice.call(document.querySelectorAll("button:not(:disabled),input:not(:disabled)"))
+        .filter(function (el) { return el.offsetWidth > 0 && el.offsetHeight > 0; });
+      var current = focusables.indexOf(document.activeElement);
+      if (current < 0) { focusables[0] && focusables[0].focus(); }
+      else {
+        var currentRect = document.activeElement.getBoundingClientRect();
+        var direction = key.replace("Arrow", "").toLowerCase();
+        var candidates = focusables.filter(function (el) {
+          if (el === document.activeElement) return false;
+          var r = el.getBoundingClientRect();
+          if (direction === "down") return r.top >= currentRect.bottom - 8;
+          if (direction === "up") return r.bottom <= currentRect.top + 8;
+          if (direction === "right") return r.left >= currentRect.right - 8;
+          return r.right <= currentRect.left + 8;
+        }).map(function (el) {
+          var r = el.getBoundingClientRect();
+          var dx = (r.left + r.width / 2) - (currentRect.left + currentRect.width / 2);
+          var dy = (r.top + r.height / 2) - (currentRect.top + currentRect.height / 2);
+          return { el: el, score: Math.abs(direction === "left" || direction === "right" ? dx : dy) + Math.abs(direction === "left" || direction === "right" ? dy : dx) * 2 };
+        }).sort(function (x, y) { return x.score - y.score; });
+        if (candidates[0]) candidates[0].el.focus();
+      }
+      event.preventDefault();
+    }
     if (key === "Escape" || key === "Backspace") {
       if (document.activeElement === $("search")) { $("search").blur(); $("search").value = ""; renderSongs(); }
       else if (typed) { typed = ""; updateNumber(); }
