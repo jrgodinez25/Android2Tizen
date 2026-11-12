@@ -39,7 +39,7 @@
         <div class="transport panel">
           <div class="now-playing"><span class="eyebrow">NOW PLAYING</span><strong id="nowPlaying">Nothing selected</strong></div>
           <div class="transport-actions">
-            <button id="playBtn" class="primary" disabled>▶ PLAY DEMO</button>
+            <button id="loadAudioBtn" class="secondary">LOAD AUDIO</button><button id="loadLrcBtn" class="secondary">LOAD LRC</button><button id="playBtn" class="primary" disabled>▶ PLAY</button>
             <button id="stopBtn" class="secondary" disabled>■ STOP</button>
             <button id="nextBtn" class="secondary" disabled>⏭ NEXT</button>
           </div>
@@ -65,7 +65,7 @@
     </section>
     <footer class="footer"><span>ANDROID2TIZEN · KARAOKE MVP 0.1.0</span><span>DEMO LYRICS &amp; CATALOG ONLY · NO SONG PACK INCLUDED</span></footer>
   </main>
-  <audio id="audio" preload="metadata"></audio>
+  <input id="audioFile" class="hidden" type="file" accept="audio/*"><input id="lrcFile" class="hidden" type="file" accept=".lrc,text/plain"><audio id="audio" preload="metadata"></audio>
   <script src="js/catalog.js"></script>
   <script src="js/app.js"></script>
 </body>
