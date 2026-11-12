@@ -131,3 +131,22 @@ Manual (requires user's SDK/certificate or physical TV):
 - Installation and runtime verification on the television.
 
 We will not claim a WGT is built, signed, installed, or tested until those steps have actually completed.
+
+
+## 10. Automated GitHub WGT build and release
+
+The repository workflow `.github/workflows/build-tizen-wgt.yml` now builds an **unsigned** `KaraokeTV.wgt` ZIP widget package on pushes, pull requests, and manual dispatch. It uploads the package as a 14-day Actions artifact.
+
+When a version tag matching `v*` is pushed, the same workflow publishes a GitHub Release containing exactly one `.wgt` asset (`KaraokeTV.wgt`) and its SHA-256 checksum. TizenBrew Installer's GitHub install flow looks up the latest published release and installs its WGT asset; keep only the intended installable WGT in each release.
+
+The build intentionally does not use a Samsung signing certificate or GitHub secrets. The WGT is unsigned so the TizenBrew TV-side re-signing flow can sign it for the target TV. This must be confirmed with the installed Installer version during the first device installation.
+
+### Trigger a test build
+
+Use GitHub Actions → **Build Tizen WGT and publish release** → **Run workflow** on the development branch. Download the `KaraokeTV-WGT` artifact and inspect the package.
+
+### Publish a release
+
+After the test artifact and device-compatible package are confirmed, create and push a version tag, for example `v0.1.0`. A published release is required before entering `jrgodinez25/Android2Tizen` in TizenBrew's **Install from GitHub** screen.
+
+Do not publish a tag until the PR has been reviewed and the release candidate is approved. A draft release is not discoverable through the latest-release endpoint.
