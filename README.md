@@ -82,7 +82,7 @@ Only analyze applications you own or are authorized to inspect. Do not use this 
 - [x] Safe, non-executing APK structure inspector
 - [ ] Target APK supplied
 - [ ] APK analysis and feature inventory
-- [ ] Target TV compatibility confirmed
+- [x] Primary test TV identified (UA50CU8100G; platform/firmware confirmation pending)\n- [ ] Target TV compatibility confirmed
 - [ ] Tizen application implementation
 - [ ] Build, signing, deployment, and QA
 
