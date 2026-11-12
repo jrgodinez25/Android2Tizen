@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Karaoke TV</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <main id="app" class="layout">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">♫</span><div><strong>KARAOKE TV</strong><small>ANDROID2TIZEN · MVP</small></div></div>
+      <div class="status"><span class="live-dot"></span><span id="statusText">READY TO SING</span></div>
+      <div class="clock" id="clock">--:--</div>
+    </header>
+
+    <section class="workspace">
+      <aside class="left-panel panel">
+        <div class="panel-heading"><div><span class="eyebrow">SONG LIBRARY</span><h1>Select a song</h1></div><span class="count" id="songCount">06</span></div>
+        <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Search title, artist or number" autocomplete="off"></label>
+        <div class="song-list" id="songList" aria-label="Song list"></div>
+        <div class="library-note">DEMO CATALOG · ORIGINAL TEST CONTENT</div>
+      </aside>
+
+      <section class="center-panel">
+        <div class="stage panel" id="stage">
+          <div class="stage-glow"></div>
+          <div class="stage-top"><span class="stage-pill">♫  KARAOKE STAGE</span><span id="stageMode">STANDBY</span></div>
+          <div class="stage-content">
+            <div class="stage-number" id="stageNumber">00000</div>
+            <div class="stage-title" id="stageTitle">Choose your song</div>
+            <div class="stage-artist" id="stageArtist">Your karaoke night starts here</div>
+            <div class="lyric-area" id="lyricArea">
+              <p class="lyric muted">Select a demo track from the library or enter its number.</p>
+            </div>
+          </div>
+          <div class="stage-bottom"><span id="playbackLabel">NO TRACK LOADED</span><span id="elapsed">00:00 / 00:00</span></div>
+        </div>
+        <div class="transport panel">
+          <div class="now-playing"><span class="eyebrow">NOW PLAYING</span><strong id="nowPlaying">Nothing selected</strong></div>
+          <div class="transport-actions">
+            <button id="playBtn" class="primary" disabled>▶ PLAY DEMO</button>
+            <button id="stopBtn" class="secondary" disabled>■ STOP</button>
+            <button id="nextBtn" class="secondary" disabled>⏭ NEXT</button>
+          </div>
+        </div>
+        <div class="hintbar">REMOTE: <b>↑ ↓</b> NAVIGATE <i>·</i> <b>OK</b> SELECT <i>·</i> <b>BACK</b> CLOSE SEARCH</div>
+      </section>
+
+      <aside class="right-panel panel">
+        <div class="panel-heading"><div><span class="eyebrow">UP NEXT</span><h2>Reserved songs</h2></div><span class="count" id="queueCount">00</span></div>
+        <div id="queueList" class="queue-list"><div class="empty-queue">Your queue is empty.<br><small>Choose a song and press RESERVE.</small></div></div>
+        <div class="queue-footer"><button id="clearQueue" class="text-button">CLEAR QUEUE</button></div>
+        <div class="keypad-block">
+          <div class="keypad-heading"><span class="eyebrow">SONG NUMBER</span><span id="numberDisplay">_ _ _ _ _</span></div>
+          <div class="keypad" id="keypad">
+            <button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button>
+            <button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button>
+            <button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button>
+            <button data-action="clear" class="utility">CLR</button><button data-digit="0">0</button><button data-action="backspace" class="utility">⌫</button>
+          </div>
+          <div class="keypad-actions"><button id="findBtn" class="secondary">FIND SONG</button><button id="reserveBtn" class="primary">＋ RESERVE</button></div>
+        </div>
+      </aside>
+    </section>
+    <footer class="footer"><span>ANDROID2TIZEN · KARAOKE MVP 0.1.0</span><span>DEMO LYRICS &amp; CATALOG ONLY · NO SONG PACK INCLUDED</span></footer>
+  </main>
+  <audio id="audio" preload="metadata"></audio>
+  <script src="js/catalog.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
