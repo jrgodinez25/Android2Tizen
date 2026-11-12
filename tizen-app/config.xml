@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="org.jrgodinez25.karaoketv"
+        version="0.1.0"
+        viewmodes="maximized">
+  <tizen:application id="org.jrgodinez25.karaoketv" package="orgjrgodinez25" required_version="2.3"/>
+  <content src="index.html"/>
+  <name>Karaoke TV</name>
+  <description>Original karaoke player prototype for Samsung Tizen Smart TVs.</description>
+  <icon src="icon.png"/>
+  <tizen:profile name="tv"/>
+  <tizen:setting screen-orientation="landscape"
+                 context-menu="disable"
+                 background-support="disable"
+                 encryption="disable"
+                 install-location="auto"
+                 hwkey-event="enable"/>
+  <feature name="http://tizen.org/feature/screen.size.normal"/>
+  <access origin="*" subdomains="true"/>
+</widget>
