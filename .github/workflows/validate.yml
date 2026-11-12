@@ -1,0 +1,25 @@
+name: Validate Tizen MVP
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  static-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate project structure and Tizen XML
+        run: python scripts/validate_project.py
+      - name: Check JavaScript syntax
+        run: |
+          node --check tizen-app/js/catalog.js
+          node --check tizen-app/js/app.js
