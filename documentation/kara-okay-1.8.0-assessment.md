@@ -76,3 +76,12 @@ The public upstream repository exposes documentation and release links, not a co
 ## Security and licensing
 
 Never commit the APK, extracted proprietary resources, downloaded song packs, credentials, certificates or user data. This report contains only structural observations and public feature descriptions. Reverse engineering must respect applicable licenses and authorization.
+
+
+## Upstream licensing and version clarification (reviewed 2026-11-12)
+
+The upstream README explicitly states that KARA-OKAY's source code is not public. It identifies BASS, BASSMIDI and BASS_FX as the audio engine in version 1.8, and says the phone/TV app changed to FluidSynth in version 1.9. The supplied APK contains the BASS-family native libraries, consistent with the 1.8 version being analyzed.
+
+The upstream README also identifies separate licenses/terms for FluidSynth, GeneralUser GS, and other sound banks. Do not copy or redistribute these assets or source components without confirming the applicable rights. This repository will use original UI, original demo lyrics/catalog, and independently selected components with compatible licenses. A future FluidSynth/WebAssembly port must comply with the LGPL and any soundfont license terms.
+
+The upstream README advertises later 1.9 capabilities, but these must not be attributed to the supplied 1.8 APK without binary-level verification.
