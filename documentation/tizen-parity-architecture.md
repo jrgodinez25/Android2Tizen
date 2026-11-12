@@ -106,7 +106,7 @@ A FluidSynth/WASM spike should answer these questions before it becomes the prod
 | Candidate | Role | Assessment |
 |---|---|---|
 | FluidSynth compiled to WASM | MIDI/SF2 synthesis | Preferred feasibility spike; not yet validated on target |
-| Web Audio API | Audio graph, gain, pan, filters and mixing | Supported by Samsung's web-engine specification; physical latency/performance still needs measurement |
+| Web Audio API | Audio graph, gain, pan, filters and mixing | Candidate only; feature-detect and verify behavior on the target Tizen 7 TV before committing to this PCM output path |
 | HTML audio/video | MP3/AAC/WAV and background media | Use for supported codecs; test actual TV codec/container matrix |
 | Tizen WASM Player | Encoded elementary-stream playback | Not a MIDI synthesizer; not the first choice for generated PCM |
 | BASS Android JNI libraries | Original APK engine | Not reusable as-is; Android ABI/JNI dependency and licensing make this unsuitable |
