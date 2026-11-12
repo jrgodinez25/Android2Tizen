@@ -12,14 +12,14 @@
 - [x] Song selection and reservation queue
 - [x] Queue removal and clear
 - [x] Lyric cue timeline
-- [x] Local audio-file selection using the browser File API
+- [x] Local audio-file selection using the browser File API\n- [x] LRC import with timestamp parsing and audio-clock synchronization
 - [x] LRC import and timestamp parsing
 - [x] Basic directional focus navigation and Samsung Back key handling
 - [x] Documentation of scope and known limitations
 
 ## Not yet implemented
 
-- [ ] Verify Tizen SDK manifest/profile and WGT packaging
+- [ ] Verify Tizen SDK manifest/profile and WGT packaging\n- [ ] Pass automated XML, project-structure, and JavaScript syntax checks
 - [ ] Install and test on physical Samsung UA50CU8100G
 - [ ] Verify USB/file picker and audio codec behavior
 - [ ] Persistent catalog and queue storage
