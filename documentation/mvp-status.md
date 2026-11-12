@@ -17,7 +17,7 @@
 - [x] Basic directional focus navigation and Samsung Back key handling
 - [x] Documentation of scope and known limitations
 
-## Not yet implemented
+- [x] Record confirmed TV model, firmware family, TPK runtime version, and remote model\n- [x] Add on-device Tizen/platform/firmware runtime diagnostics\n\n## Not yet implemented
 
 - [ ] Verify Tizen SDK manifest/profile and WGT packaging\n- [x] Pass automated XML, project-structure, and JavaScript syntax checks (GitHub Actions run 43191772093)
 - [ ] Install and test on physical Samsung UA50CU8100G
@@ -49,4 +49,4 @@
 
 ## Version compatibility
 
-The target is Samsung UA50CU8100G (2023 CU8100 family). Do not infer the currently installed Tizen platform from model year. Confirm TV software version and validate every required API on the device.
+The target is Samsung UA50CU8100GXXP. The manifest baseline is Tizen 7.0 (2023 model-year baseline); the app now displays the actual runtime platform, model, and firmware when launched on the TV. Physical WGT installation and device validation remain pending.
