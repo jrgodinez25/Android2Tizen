@@ -289,7 +289,8 @@
 
   function updateClock() { var d = new Date(); $("clock").textContent = d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }
   updateClock(); setInterval(updateClock, 30000);
-  renderSongs(); renderQueue(); updateNumber();\n  detectDeviceRuntime();
+  renderSongs(); renderQueue(); updateNumber();
+  detectDeviceRuntime();
   try {
     if (window.tizen && tizen.tvinputdevice) {
       ["MediaPlayPause","MediaStop","MediaPlay","MediaPause"].forEach(function (k) { try { tizen.tvinputdevice.registerKey(k); } catch (e) {} });
