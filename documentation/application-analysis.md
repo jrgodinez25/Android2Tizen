@@ -1,6 +1,6 @@
 # Application Analysis
 
-**Status:** Pending target APK.
+**Status:** Pending target APK. Physical test device identified; see [Target Device Profile](device-profile.md).
 
 ## Input record
 
