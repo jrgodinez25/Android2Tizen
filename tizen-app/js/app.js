@@ -208,7 +208,6 @@
   $("audio").addEventListener("loadedmetadata", function () {
     if (selected) $("elapsed").textContent = "00:00 / " + formatTime(activeDuration());
   });
-  $("audio").addEventListener("timeupdate", function () { if (playing) tick(); });
   $("audio").addEventListener("ended", function () { stopPlayback(); });
 
   document.addEventListener("keydown", function (event) {
