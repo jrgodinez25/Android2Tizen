@@ -1,0 +1,62 @@
+name: Build Tizen WGT and publish release
+
+on:
+  push:
+    branches: [main, "feature/**"]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate Tizen project
+        run: python scripts/validate_project.py
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check tizen-app/js/catalog.js
+          node --check tizen-app/js/app.js
+
+      - name: Build unsigned Tizen WGT
+        run: python scripts/build_wgt.py
+
+      - name: Upload WGT build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KaraokeTV-WGT
+          path: |
+            dist/KaraokeTV.wgt
+            dist/KaraokeTV.wgt.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish GitHub Release for version tags
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Karaoke TV ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          files: |
+            dist/KaraokeTV.wgt
+            dist/KaraokeTV.wgt.sha256
