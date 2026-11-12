@@ -12,6 +12,26 @@
   var audio = document.getElementById("audio");
   var $ = function (id) { return document.getElementById(id); };
 
+  function detectDeviceRuntime() {
+    var parts = [];
+    try {
+      if (window.tizen && tizen.systeminfo) {
+        parts.push("TIZEN " + tizen.systeminfo.getCapability("http://tizen.org/feature/platform.version"));
+      }
+    } catch (e) { parts.push("TIZEN VERSION UNAVAILABLE"); }
+    try {
+      if (window.webapis && webapis.productinfo) {
+        var model = webapis.productinfo.getModel();
+        var firmware = webapis.productinfo.getFirmware();
+        if (model) parts.push(model);
+        if (firmware) parts.push("FW " + firmware);
+      }
+    } catch (e) { parts.push("PRODUCT INFO UNAVAILABLE"); }
+    var label = $("deviceRuntime");
+    if (label) label.textContent = parts.length ? parts.join(" · ") : "TV PLATFORM: BROWSER / NOT DETECTED";
+    console.log("[Karaoke TV] Runtime diagnostics:", parts);
+  }
+
   function toast(message) {
     var old = document.querySelector(".toast");
     if (old) old.remove();
@@ -269,7 +289,7 @@
 
   function updateClock() { var d = new Date(); $("clock").textContent = d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }
   updateClock(); setInterval(updateClock, 30000);
-  renderSongs(); renderQueue(); updateNumber();
+  renderSongs(); renderQueue(); updateNumber();\n  detectDeviceRuntime();
   try {
     if (window.tizen && tizen.tvinputdevice) {
       ["MediaPlayPause","MediaStop","MediaPlay","MediaPause"].forEach(function (k) { try { tizen.tvinputdevice.registerKey(k); } catch (e) {} });
