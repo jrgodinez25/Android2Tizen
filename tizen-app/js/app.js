@@ -7,7 +7,8 @@
   var playing = false;
   var demoStartedAt = 0;
   var pausedAt = 0;
-  var tickHandle = null;\n  var audioObjectUrl = null;
+  var tickHandle = null;
+  var audioObjectUrl = null;
   var audio = document.getElementById("audio");
   var $ = function (id) { return document.getElementById(id); };
 
