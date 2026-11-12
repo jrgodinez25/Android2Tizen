@@ -1,52 +1,54 @@
 # Karaoke TV MVP — Implementation Status
 
-**Branch:** `feature/kara-okay-tizen-mvp`
+**Development branch:** `feature/kara-okay-tizen-mvp`
 
 ## Implemented in source
 
-- [x] Tizen TV web-app package manifest (`config.xml`)
-- [x] 1080p/16:9 dark karaoke interface
-- [x] Demo catalog with original sample titles and lyrics
-- [x] Five-digit keypad
-- [x] Search by song number/title/artist
+- [x] Tizen TV Web App manifest
+- [x] 1080p/16:9 interface
+- [x] Original demo catalog and lyrics
+- [x] Five-digit keypad and song search
 - [x] Song selection and reservation queue
 - [x] Queue removal and clear
 - [x] Lyric cue timeline
-- [x] Local audio-file selection using the browser File API\n- [x] LRC import with timestamp parsing and audio-clock synchronization
-- [x] LRC import and timestamp parsing
-- [x] Basic directional focus navigation and Samsung Back key handling
-- [x] Documentation of scope and known limitations
+- [x] Local audio-file selection and LRC import
+- [x] Audio-clock lyric synchronization
+- [x] Basic directional remote navigation and Samsung Back key handling
+- [x] Runtime Tizen/model/firmware diagnostics
+- [x] TizenBrew Installer deployment documentation
+- [x] Automated XML, project-structure and JavaScript syntax validation
 
-- [x] Record confirmed TV model, firmware family, TPK runtime version, and remote model\n- [x] Add on-device Tizen/platform/firmware runtime diagnostics\n\n## Not yet implemented
+## Not yet implemented or verified
 
-- [ ] Verify Tizen SDK manifest/profile and WGT packaging\n- [x] Pass automated XML, project-structure, and JavaScript syntax checks (GitHub Actions run 43191772093)
-- [ ] Install and test on physical Samsung UA50CU8100G
-- [ ] Verify USB/file picker and audio codec behavior
+- [ ] Build a signed WGT using a Samsung certificate
+- [ ] Install WGT through TizenBrew Installer on UA50CU8100GXXP
+- [ ] Verify first launch and runtime diagnostics on the TV
+- [ ] Verify USB/file-picker and supported audio codecs
 - [ ] Persistent catalog and queue storage
 - [ ] Remote-phone controller and local network protocol
-- [ ] Song catalog ingestion (only licensed/authorized metadata and content)
+- [ ] Authorized song catalog import
 - [ ] MIDI/KAR parsing and playback
 - [ ] FluidSynth/WebAssembly or another licensed Tizen-compatible synthesizer
-- [ ] SF2 sound bank support
+- [ ] SF2 sound bank support and licensing review
 - [ ] Key and tempo processing
 - [ ] Audio mixer and melody guide
 - [ ] Background video/photo slideshow
-- [ ] Scoring and microphone support (if supported by TV/peripherals)
-- [ ] Download manager, resume, integrity checking and storage management
+- [ ] Scoring and microphone support
+- [ ] Download manager and offline library
 - [ ] Playlists, favorites, history, settings and songbook
-- [ ] Accessibility, performance, security and regression test suites
+- [ ] Accessibility, performance, security and regression tests
 
-## Acceptance criteria for MVP
+## Acceptance criteria
 
-1. App loads in a compatible Samsung TV Web App runtime.
-2. User can navigate the song list using directional keys.
-3. User can select a demo song by list or five-digit number.
-4. User can reserve and remove songs.
-5. User can load a locally accessible audio file and matching LRC file where supported.
-6. Lyrics advance based on audio playback time.
-7. No copyrighted song content is bundled in the demo.
-8. WGT signing, installation and physical-device validation are documented with actual results.
+1. App loads in the Samsung TV Web App runtime.
+2. Song selection works with the remote and five-digit keypad.
+3. User can reserve and remove demo songs.
+4. Local audio and matching LRC work where supported by the TV runtime.
+5. Lyrics follow the audio playback clock.
+6. No unlicensed song content is bundled.
+7. A signed WGT installs through TizenBrew Installer.
+8. Installation, launch, remote navigation and audio tests are recorded on the physical TV.
 
-## Version compatibility
+## Device baseline
 
-The target is Samsung UA50CU8100GXXP. The manifest baseline is Tizen 7.0 (2023 model-year baseline); the app now displays the actual runtime platform, model, and firmware when launched on the TV. Physical WGT installation and device validation remain pending.
+Target: Samsung UA50CU8100GXXP. Tizen 7.0 is the 2023 model-year baseline; the app reports the actual platform version at runtime because the TV may have received an OS upgrade.
