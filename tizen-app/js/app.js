@@ -156,7 +156,7 @@
   function nextSong() {
     stopPlayback();
     if (!queue.length) { toast("No reserved songs."); return; }
-    selected = queue.shift(); renderQueue(); selectSong(selected); startPlayback();
+    selected = queue.shift(); renderQueue(); selectSong(selected); toast("Next song selected. Load its matching audio and LRC files.");
   }
   $("search").addEventListener("input", renderSongs);
   $("keypad").addEventListener("click", function (event) {
@@ -257,7 +257,7 @@
       }
       event.preventDefault();
     }
-    if (key === "Escape" || key === "Backspace") {
+    if (key === "Escape" || key === "Backspace" || event.keyCode === 10009) {
       if (document.activeElement === $("search")) { $("search").blur(); $("search").value = ""; renderSongs(); }
       else if (typed) { typed = ""; updateNumber(); }
       else toast("Use STOP or NEXT to control playback.");
