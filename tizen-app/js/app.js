@@ -34,7 +34,8 @@
     $("songList").innerHTML = "";
     filtered.forEach(function (song) {
       var button = document.createElement("button");
-      button.className = "song" + (selected && selected.number === song.number ? " selected" : "");\n      button.dataset.number = song.number;
+      button.className = "song" + (selected && selected.number === song.number ? " selected" : "");
+      button.dataset.number = song.number;
       button.innerHTML = '<span class="song-number"></span><span class="song-meta"><strong></strong><small></small></span><span class="song-add">＋</span>';
       button.querySelector(".song-number").textContent = song.number;
       button.querySelector("strong").textContent = song.title;
@@ -190,7 +191,7 @@
     if (!file || !selected) { toast("Select a song before loading an LRC file."); return; }
     var reader = new FileReader();
     reader.onload = function () {
-      var lines = String(reader.result || "").split(/\\r?\\n/);
+      var lines = String(reader.result || "").split(/\r?\n/);
       var cues = [];
       lines.forEach(function (line) {
         var match = line.match(/^\\s*\\[(\\d{1,2}):(\\d{2})(?:[.:](\\d{1,3}))?\\](.*)$/);
