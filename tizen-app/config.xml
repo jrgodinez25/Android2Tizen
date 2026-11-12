@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:tizen="http://tizen.org/ns/widgets"
-        id="org.jrgodinez25.karaoketv"
+        id="http://jrgodinez25.github.io/Android2Tizen/KaraokeTV"
         version="0.1.0"
         viewmodes="maximized">
-  <tizen:application id="org.jrgodinez25.karaoketv" package="orgjrgodinez25" required_version="2.3"/>
+  <tizen:application id="orgjrgod.karaoketv" package="orgjrgod" required_version="2.3"/>
   <content src="index.html"/>
   <name>Karaoke TV</name>
   <description>Original karaoke player prototype for Samsung Tizen Smart TVs.</description>
