@@ -7,7 +7,7 @@
   var playing = false;
   var demoStartedAt = 0;
   var pausedAt = 0;
-  var tickHandle = null;
+  var tickHandle = null;\n  var audioObjectUrl = null;
   var audio = document.getElementById("audio");
   var $ = function (id) { return document.getElementById(id); };
 
@@ -110,10 +110,13 @@
       area.appendChild(line);
     });
   }
+  function activeDuration() {
+    return audio.src && isFinite(audio.duration) ? audio.duration : (selected ? selected.duration : 0);
+  }
   function tick() {
     if (!playing || !selected) return;
     var time = audio.src ? audio.currentTime : (Date.now() - demoStartedAt) / 1000;
-    var duration = selected.duration;
+    var duration = activeDuration();
     renderLyrics(time);
     $("elapsed").textContent = formatTime(time) + " / " + formatTime(duration);
     if (time >= duration) { stopPlayback(false); toast("Demo cue finished."); }
@@ -168,6 +171,43 @@
   $("playBtn").addEventListener("click", function () { if (playing) pausePlayback(); else if (pausedAt > 0 && $("stageMode").textContent === "PAUSED") resumePlayback(); else startPlayback(); });
   $("stopBtn").addEventListener("click", function () { pausedAt = 0; stopPlayback(); });
   $("nextBtn").addEventListener("click", nextSong);
+  $("loadAudioBtn").addEventListener("click", function () { $("audioFile").click(); });
+  $("loadLrcBtn").addEventListener("click", function () { $("lrcFile").click(); });
+  $("audioFile").addEventListener("change", function (event) {
+    var file = event.target.files && event.target.files[0];
+    if (!file) return;
+    if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
+    audioObjectUrl = URL.createObjectURL(file);
+    audio.src = audioObjectUrl;
+    audio.load();
+    if (!selected) selectSong(songs[0]);
+    $("playbackLabel").textContent = "LOCAL AUDIO · " + file.name;
+    toast("Audio loaded. Import a matching .LRC file for synchronized lyrics.");
+  });
+  $("lrcFile").addEventListener("change", function (event) {
+    var file = event.target.files && event.target.files[0];
+    if (!file || !selected) { toast("Select a song before loading an LRC file."); return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var lines = String(reader.result || "").split(/\\r?\\n/);
+      var cues = [];
+      lines.forEach(function (line) {
+        var match = line.match(/^\\s*\\[(\\d{1,2}):(\\d{2})(?:[.:](\\d{1,3}))?\\](.*)$/);
+        if (!match) return;
+        var fraction = match[3] ? Number("0." + match[3]) : 0;
+        cues.push({at: Number(match[1]) * 60 + Number(match[2]) + fraction, text: match[4].trim()});
+      });
+      cues.sort(function (a, b) { return a.at - b.at; });
+      if (!cues.length) { toast("No valid LRC timestamp lines found."); return; }
+      selected.lyrics = cues;
+      toast("Loaded " + cues.length + " lyric cues.");
+      if (!playing) renderLyrics(0);
+    };
+    reader.readAsText(file);
+  });
+  $("audio").addEventListener("loadedmetadata", function () {
+    if (selected) $("elapsed").textContent = "00:00 / " + formatTime(activeDuration());
+  });
   $("audio").addEventListener("timeupdate", function () { if (playing) tick(); });
   $("audio").addEventListener("ended", function () { stopPlayback(); });
 
@@ -234,5 +274,5 @@
       ["MediaPlayPause","MediaStop","MediaPlay","MediaPause"].forEach(function (k) { try { tizen.tvinputdevice.registerKey(k); } catch (e) {} });
     }
   } catch (e) {}
-  window.addEventListener("beforeunload", function () { stopPlayback(false); });
+  window.addEventListener("beforeunload", function () { stopPlayback(false); if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl); });
 }());
