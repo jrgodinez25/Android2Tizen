@@ -42,7 +42,7 @@ Desktop browser testing validates the basic HTML/JS interaction only. It does no
 3. Verify `config.xml` against the installed SDK and selected TV profile.
 4. Build a signed WGT using the SDK's IDE or CLI.
 5. Enable Developer Mode on the TV, connect the TV and development PC to the same network, and use SDB/Tizen CLI to install.
-6. Test on the actual UA50CU8100G and record its exact Tizen platform and firmware version.
+6. Test on the actual UA50CU8100GXXP and record the runtime diagnostics shown in the footer.\n7. The manifest baseline is Tizen 7.0; Samsung allows OS upgrades on 2023 models, so confirm the detected runtime on-device.
 
 Do not commit signing certificates or private keys to this repository. Samsung requires signed applications; keep author credentials backed up securely.
 
