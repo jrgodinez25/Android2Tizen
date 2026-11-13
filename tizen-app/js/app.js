@@ -88,10 +88,42 @@
     });
   }
   function updateNumber() {
-    $("numberDisplay").textContent = (typed + "_____").slice(0, 5).split("").join(" ");
+    var display = (typed + "_____").slice(0, 5).split("").join(" ");
+    $("numberDisplay").textContent = display;
+    var landingDisplay = $("selectNumberDisplay");
+    if (landingDisplay) landingDisplay.textContent = display;
+  }
+  function renderQuickPicks() {
+    var host = $("quickPickList");
+    if (!host) return;
+    host.innerHTML = "";
+    songs.slice(0, 4).forEach(function (song, index) {
+      var button = document.createElement("button");
+      button.className = "quick-song";
+      button.innerHTML = '<span class="quick-index"></span><span><strong></strong><small></small></span>';
+      button.querySelector(".quick-index").textContent = song.number;
+      button.querySelector("strong").textContent = song.title;
+      button.querySelector("small").textContent = song.artist;
+      button.addEventListener("click", function () { selectSong(song); });
+      host.appendChild(button);
+    });
+  }
+  function handleDigitAction(button) {
+    if (!button) return;
+    if (button.dataset.digit !== undefined) {
+      if (typed.length < 5) typed += button.dataset.digit;
+      updateNumber();
+      if (typed.length === 5) findNumber();
+    } else if (button.dataset.action === "clear") {
+      typed = ""; updateNumber();
+    } else if (button.dataset.action === "backspace") {
+      typed = typed.slice(0, -1); updateNumber();
+    }
   }
   function selectSong(song) {
     selected = song;
+    var landing = $("selectScreen");
+    if (landing) landing.style.display = "none";
     $("stageNumber").textContent = song.number;
     $("stageTitle").textContent = song.title;
     $("stageArtist").textContent = song.artist;
@@ -181,6 +213,10 @@
     selected = queue.shift(); renderQueue(); selectSong(selected); toast("Next song selected. Load its matching audio and LRC files.");
   }
   $("search").addEventListener("input", renderSongs);
+  if ($("selectKeypad")) $("selectKeypad").addEventListener("click", function (event) {
+    handleDigitAction(event.target.closest("button"));
+  });
+  if ($("selectFindBtn")) $("selectFindBtn").addEventListener("click", findNumber);
   $("keypad").addEventListener("click", function (event) {
     var button = event.target.closest("button"); if (!button) return;
     if (button.dataset.digit !== undefined) { if (typed.length < 5) typed += button.dataset.digit; updateNumber(); if (typed.length === 5) findNumber(); }
@@ -279,6 +315,12 @@
       event.preventDefault();
     }
     if (key === "Escape" || key === "Backspace" || event.keyCode === 10009) {
+      var landing = $("selectScreen");
+      if (landing && landing.style.display === "none" && !playing) {
+        landing.style.display = "grid";
+        event.preventDefault();
+        return;
+      }
       if (document.activeElement === $("search")) { $("search").blur(); $("search").value = ""; renderSongs(); }
       else if (typed) { typed = ""; updateNumber(); }
       else toast("Use STOP or NEXT to control playback.");
@@ -289,7 +331,7 @@
 
   function updateClock() { var d = new Date(); $("clock").textContent = d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }
   updateClock(); setInterval(updateClock, 30000);
-  renderSongs(); renderQueue(); updateNumber();
+  renderSongs(); renderQueue(); renderQuickPicks(); updateNumber();
   detectDeviceRuntime();
   try {
     if (window.tizen && tizen.tvinputdevice) {
