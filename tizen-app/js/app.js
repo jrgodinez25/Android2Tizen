@@ -273,6 +273,9 @@
     if (/^[0-9]$/.test(key) && document.activeElement.tagName !== "INPUT") {
       if (typed.length < 5) typed += key; updateNumber(); if (typed.length === 5) findNumber(); event.preventDefault(); return;
     }
+    if (key === "Enter" && document.activeElement.closest && document.activeElement.closest(".quick-song")) {
+      return; // Let the focused quick-pick button receive its native activation.
+    }
     if (key === "Enter" && document.activeElement.tagName !== "INPUT") {
       var focusedSong = document.activeElement.closest ? document.activeElement.closest(".song") : null;
       if (focusedSong) {
@@ -333,6 +336,10 @@
   updateClock(); setInterval(updateClock, 30000);
   renderSongs(); renderQueue(); renderQuickPicks(); updateNumber();
   detectDeviceRuntime();
+  if ($("selectKeypad")) {
+    var firstDigit = $("selectKeypad").querySelector("button");
+    if (firstDigit) firstDigit.focus();
+  }
   try {
     if (window.tizen && tizen.tvinputdevice) {
       ["MediaPlayPause","MediaStop","MediaPlay","MediaPause"].forEach(function (k) { try { tizen.tvinputdevice.registerKey(k); } catch (e) {} });
