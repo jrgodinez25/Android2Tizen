@@ -10,7 +10,7 @@
   <main id="app" class="layout">
     <header class="topbar">
       <div class="brand"><span class="brand-mark">♫</span><div><strong>KARAOKE TV</strong><small>ANDROID2TIZEN · MVP</small></div></div>
-      <div class="status"><span class="live-dot"></span><span id="statusText">READY TO SING</span></div>
+      <div class="status"><span class="live-dot"></span><span id="statusText">READY TO SING</span></div><button id="settingsOpen" class="settings-open">⚙ SETTINGS</button>
       <div class="clock" id="clock">--:--</div>
     </header>
 
@@ -34,6 +34,21 @@
         <div id="quickPickList" class="quick-grid"></div>
         <div class="select-footnote">Use the number keys on your Samsung remote, or navigate with the directional pad.</div>
       </div>
+    </section>
+    <section id="settingsScreen" class="settings-screen" aria-label="Settings" hidden>
+      <header class="settings-header"><button id="settingsBack" class="settings-back">← BACK</button><div><span class="eyebrow">KARA-OKAY-INSPIRED</span><h1>Settings</h1></div></header>
+      <div class="settings-summary"><span class="settings-chip selected">♫ SOUND · MAJOR</span><span class="settings-chip">47,904 SONGS · REFERENCE</span><span class="settings-chip">TV PROFILE</span></div>
+      <div class="settings-grid" id="settingsGrid">
+        <button class="settings-card" data-setting="sound"><span class="settings-icon">♫</span><span><strong>Sound</strong><small>Instrument bank, mixer, bass, treble and echo</small></span><b>›</b></button>
+        <button class="settings-card" data-setting="singing"><span class="settings-icon">♪</span><span><strong>Singing</strong><small>Melody guide, score, count-in and recording</small></span><b>›</b></button>
+        <button class="settings-card" data-setting="lyrics"><span class="settings-icon">≋</span><span><strong>Lyrics</strong><small>Font, size, colour, outline and placement</small></span><b>›</b></button>
+        <button class="settings-card" data-setting="screen"><span class="settings-icon">▣</span><span><strong>Screen and background</strong><small>Theme, videos, photos and stage layout</small></span><b>›</b></button>
+        <button class="settings-card" data-setting="library"><span class="settings-icon">＋</span><span><strong>Your songs and sounds</strong><small>USB folders, MIDI, KAR, MP3 and SF2</small></span><b>›</b></button>
+        <button class="settings-card" data-setting="remote"><span class="settings-icon">▯</span><span><strong>TV and remote</strong><small>Phone remote, TV layout and pairing</small></span><b>›</b></button>
+        <button class="settings-card" data-setting="about"><span class="settings-icon">ⓘ</span><span><strong>Songs, app and about</strong><small>Song updates, storage and app information</small></span><b>›</b></button>
+      </div>
+      <section id="settingsDetail" class="settings-detail" hidden><button id="settingsDetailBack" class="settings-back">← SETTINGS</button><h2 id="settingsDetailTitle"></h2><p id="settingsDetailText"></p><div id="settingsDetailBody"></div></section>
+      <p class="settings-disclaimer">Settings interface milestone · playback, media import and device-level controls will be implemented and verified separately.</p>
     </section>
     <section class="workspace">
       <aside class="left-panel panel">
