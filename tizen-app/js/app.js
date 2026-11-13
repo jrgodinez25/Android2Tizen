@@ -96,8 +96,14 @@
   function renderQuickPicks() {
     var host = $("quickPickList");
     if (!host) return;
+    var query = ($("selectSearch") ? $("selectSearch").value : "").trim().toLowerCase();
+    var filtered = songs.filter(function (song) {
+      if (!query) return true;
+      var lyrics = (song.lyrics || []).map(function (cue) { return cue.text; }).join(" ");
+      return (song.number + " " + song.title + " " + song.artist + " " + lyrics).toLowerCase().indexOf(query) >= 0;
+    });
     host.innerHTML = "";
-    songs.slice(0, 4).forEach(function (song, index) {
+    filtered.slice(0, 8).forEach(function (song) {
       var button = document.createElement("button");
       button.className = "quick-song";
       button.innerHTML = '<span class="quick-index"></span><span><strong></strong><small></small></span>';
@@ -107,6 +113,14 @@
       button.addEventListener("click", function () { selectSong(song); });
       host.appendChild(button);
     });
+    if (!filtered.length) {
+      var empty = document.createElement("div");
+      empty.className = "quick-empty";
+      empty.textContent = "No matching demo songs. Try a title, singer, number or lyric phrase.";
+      host.appendChild(empty);
+    }
+    var count = $("quickResultCount");
+    if (count) count.textContent = filtered.length + " MATCH" + (filtered.length === 1 ? "" : "ES");
   }
   function handleDigitAction(button) {
     if (!button) return;
@@ -217,6 +231,7 @@
     handleDigitAction(event.target.closest("button"));
   });
   if ($("selectFindBtn")) $("selectFindBtn").addEventListener("click", findNumber);
+  if ($("selectSearch")) $("selectSearch").addEventListener("input", renderQuickPicks);
   $("keypad").addEventListener("click", function (event) {
     var button = event.target.closest("button"); if (!button) return;
     if (button.dataset.digit !== undefined) { if (typed.length < 5) typed += button.dataset.digit; updateNumber(); if (typed.length === 5) findNumber(); }
@@ -321,6 +336,8 @@
       var landing = $("selectScreen");
       if (landing && landing.style.display === "none" && !playing) {
         landing.style.display = "grid";
+        if ($("selectSearch")) $("selectSearch").value = "";
+        renderQuickPicks();
         event.preventDefault();
         return;
       }
