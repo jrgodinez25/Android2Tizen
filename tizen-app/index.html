@@ -14,6 +14,26 @@
       <div class="clock" id="clock">--:--</div>
     </header>
 
+    <section id="selectScreen" class="select-screen" aria-label="Select a song">
+      <div class="select-hero">
+        <span class="eyebrow">KARA-OKAY-INSPIRED TV EXPERIENCE</span>
+        <h1>Select a Song</h1>
+        <p>Enter a five-digit song number or choose a quick pick.</p>
+        <div id="selectNumberDisplay" class="select-number">_ _ _ _ _</div>
+        <div class="select-keypad" id="selectKeypad" aria-label="Song number keypad">
+          <button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button>
+          <button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button>
+          <button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button>
+          <button data-action="clear" class="utility">CLEAR</button><button data-digit="0">0</button><button data-action="backspace" class="utility">⌫</button>
+        </div>
+        <button id="selectFindBtn" class="select-find">FIND SONG <span>↗</span></button>
+      </div>
+      <div class="quick-picks">
+        <div class="quick-heading"><div><span class="eyebrow">READY WHEN YOU ARE</span><h2>Quick picks</h2></div><span class="quick-note">DEMO TRACKS</span></div>
+        <div id="quickPickList" class="quick-grid"></div>
+        <div class="select-footnote">Use the number keys on your Samsung remote, or navigate with the directional pad.</div>
+      </div>
+    </section>
     <section class="workspace">
       <aside class="left-panel panel">
         <div class="panel-heading"><div><span class="eyebrow">SONG LIBRARY</span><h1>Select a song</h1></div><span class="count" id="songCount">06</span></div>
