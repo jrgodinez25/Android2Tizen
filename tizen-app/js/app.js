@@ -283,6 +283,61 @@
   });
   $("audio").addEventListener("ended", function () { stopPlayback(); });
 
+
+  var settingsContent = {
+    sound: ["Sound", "Choose an instrument sound and tune the mix for your room.", [["Instrument banks","Major · DreamsAM · Classic","Sound-bank loading and MIDI synthesis are a separate audio-engine milestone."],["Sound mixer","Bass · Drums · Others · Bass boost · Treble","Mixer controls will be connected after the Tizen audio engine is integrated."],["Echo","Off · Light · Normal · Strong","Echo processing is not active in this UI milestone."],["Sound quality","Auto · High · Light","Quality profiles require audio-engine benchmarking on the TV."]]],
+    singing: ["Singing", "Configure melody guidance, scoring, count-in and recording behavior.", [["Melody guide","On / Off","MIDI melody-channel playback is not yet connected."],["Score after each song","For fun · Mic · Off","Microphone scoring requires supported audio input and DSP."],["Count-in","Dots · 4 3 2 1 · Your pictures","Count-in presentation will be implemented with the stage player."],["Recording","Audio · Video · Per-song file","Recording is not enabled in this build."]]],
+    lyrics: ["Lyrics", "Customize the appearance and placement of karaoke lyrics.", [["Font","Standard · Easy to read · Modern · Narrow · Heavy","Font choices will be applied to the live lyric renderer."],["Colour","Classic · Mint · Gold · Pink · White to Yellow","Word-level colour wipe requires timed lyric syllables."],["Outline","Thin · Normal · Thick","Outline preferences will be persisted in a later settings milestone."],["Lines and position","2 lines · 3 lines · Lower · Middle","The current preview supports two timed cue lines."]]],
+    screen: ["Screen and background", "Choose the stage look, background media and TV presentation.", [["Theme","Green · Ocean blue · Purple night · Rose · Soft dark","The green theme is currently active; theme switching is planned."],["Background","Videos and photos · Videos only · Photos only · Plain","Background slideshow playback is not yet integrated."],["Picture changes","Once a song · Every 5 s · Every 8 s · Every 10 s","Requires local media library support."],["Singing screen","Auto-rotate · Landscape · Portrait · Stage on TV","TV output and orientation behavior will be verified on hardware."]]],
+    library: ["Your songs and sounds", "Add user-owned songs, sound banks, photos and videos.", [["USB drive or SD card","Add a folder","TV file-picker and removable-storage access need device testing."],["Kara-okay folder","Scan a selected folder","Folder scanning and catalog indexing are not yet implemented."],["Song formats","MIDI · KAR · MP3 · MP4","Only browser-supported local audio preview is currently available."],["Sound bank","SF2","SF2 loading depends on the selected licensed synthesizer."]]],
+    remote: ["TV and remote", "Use a phone as a remote or configure TV-first navigation.", [["Phone remote","Pair device","A local-network remote service and pairing flow are not yet implemented."],["Allow other phones","Admin / Guest","Authentication and guest permissions are planned."],["Screen layout","Automatic · TV · Phone","This Tizen app currently targets the TV layout."]]],
+    about: ["Songs, app and about", "Review catalog status, updates, storage and application information.", [["Song catalog","Demo catalog only","No commercial or copyrighted song catalog is bundled."],["Updates","Check for an update","An update service is not configured."],["About","Android2Tizen · KARAOKE TV","Independent clean-room Tizen implementation."]]]
+  };
+  function openSettings() {
+    $("selectScreen").style.display = "none";
+    $("settingsScreen").hidden = false;
+    $("settingsDetail").hidden = true;
+    $("settingsGrid").hidden = false;
+    var first = $("settingsGrid").querySelector("button");
+    if (first) first.focus();
+  }
+  function closeSettings() {
+    $("settingsScreen").hidden = true;
+    if (!selected && !playing) {
+      $("selectScreen").style.display = "grid";
+      if ($("selectKeypad")) $("selectKeypad").querySelector("button").focus();
+    }
+  }
+  function showSettingsDetail(key) {
+    var item = settingsContent[key];
+    if (!item) return;
+    $("settingsDetailTitle").textContent = item[0];
+    $("settingsDetailText").textContent = item[1];
+    var body = $("settingsDetailBody");
+    body.innerHTML = "";
+    item[2].forEach(function (row) {
+      var el = document.createElement("div");
+      el.className = "settings-detail-row";
+      var title = document.createElement("strong"); title.textContent = row[0];
+      var choices = document.createElement("div"); choices.textContent = row[1];
+      var note = document.createElement("small"); note.textContent = row[2];
+      el.appendChild(title); el.appendChild(choices); el.appendChild(note); body.appendChild(el);
+    });
+    $("settingsGrid").hidden = true;
+    $("settingsDetail").hidden = false;
+    $("settingsDetailBack").focus();
+  }
+  if ($("settingsOpen")) $("settingsOpen").addEventListener("click", openSettings);
+  if ($("settingsBack")) $("settingsBack").addEventListener("click", closeSettings);
+  if ($("settingsDetailBack")) $("settingsDetailBack").addEventListener("click", function () {
+    $("settingsDetail").hidden = true; $("settingsGrid").hidden = false;
+    var first = $("settingsGrid").querySelector("button"); if (first) first.focus();
+  });
+  if ($("settingsGrid")) $("settingsGrid").addEventListener("click", function (event) {
+    var card = event.target.closest("button[data-setting]");
+    if (card) showSettingsDetail(card.dataset.setting);
+  });
+
   document.addEventListener("keydown", function (event) {
     var key = event.key;
     if (/^[0-9]$/.test(key) && document.activeElement.tagName !== "INPUT") {
@@ -333,6 +388,11 @@
       event.preventDefault();
     }
     if (key === "Escape" || key === "Backspace" || event.keyCode === 10009) {
+      if (!$("settingsScreen").hidden) {
+        if (!$("settingsDetail").hidden) { $("settingsDetail").hidden = true; $("settingsGrid").hidden = false; $("settingsBack").focus(); }
+        else closeSettings();
+        event.preventDefault(); return;
+      }
       var landing = $("selectScreen");
       if (landing && landing.style.display === "none" && !playing) {
         landing.style.display = "grid";
