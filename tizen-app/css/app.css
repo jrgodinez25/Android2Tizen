@@ -27,3 +27,53 @@
 .select-search-wrap input{width:100%;height:100%;border:0;outline:0;background:transparent;color:#f4f7fc;font-size:15px;letter-spacing:0}
 .select-search-wrap input::placeholder{color:#8194aa}
 .quick-empty{grid-column:1/-1;padding:24px;border:1px dashed #40566f;border-radius:12px;color:#a9b8c9;font-size:14px;line-height:1.5}
+
+/* Screenshot-led KARA-OKAY visual system and TV settings navigation. */
+:root{--ko-bg:#004b3d;--ko-panel:#005344;--ko-panel2:#004638;--ko-line:#267c6b;--ko-mint:#00c6a0;--ko-light:#67dfc2;--ko-text:#e5f5ef;--ko-muted:#b0d0c7}
+body{background:radial-gradient(ellipse at 50% 0%,#08745c 0,#00513f 48%,#003d32 100%);color:var(--ko-text)}
+.layout{background:transparent}
+.topbar{border-color:#23806c}
+.brand-mark{background:var(--ko-mint);color:#003b31}
+.brand strong{letter-spacing:.06em}
+.eyebrow,.status,.clock{color:var(--ko-light)}
+.live-dot{background:var(--ko-mint);box-shadow:0 0 15px #00c6a0}
+.panel{background:linear-gradient(145deg,#005443f2,#004536f5);border:1px solid #267b69;border-radius:18px;box-shadow:0 12px 32px #002d2540}
+.search-wrap,.select-search-wrap{background:#004b3d;border-color:#398b79;border-radius:12px}
+.search-wrap input,.select-search-wrap input{color:#f0fff9}
+.song{background:#005141;border:1px solid #247967;border-radius:13px}
+.song.selected{background:#006450;border-color:var(--ko-mint)}
+.song-meta small,.queue-info small,.stage-artist{color:var(--ko-muted)}
+.count,.stage-pill{background:#00725b;color:#80ead0}
+.stage{background:radial-gradient(ellipse at 50% 70%,#08755e 0,#00513f 48%,#003d32 100%)}
+.stage-title{color:#effff9}
+.lyric.active{color:#f5fff9;text-shadow:0 2px 18px #00c6a080}
+.primary,.select-find{background:var(--ko-mint);color:#003c31}
+.secondary,.keypad button{background:#00604d;border-color:#2b8b76;color:#d8fff2}
+.select-screen{background:radial-gradient(ellipse at 55% 25%,#0a765e 0,#00523f 50%,#003e32 100%);grid-template-columns:minmax(390px,44%) 1fr}
+.select-hero h1{font-family:Impact,"Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#e8fff6;text-shadow:2px 3px #00372e}
+.select-number{border:0;border-bottom:4px solid var(--ko-mint);border-radius:0;background:transparent;color:#80efd5}
+.select-keypad button{background:#005544c9;border:1px solid #338875;border-radius:13px;color:#f3fff9}
+.quick-song{background:#005141;border-color:#267b69;border-radius:15px}
+.quick-song:focus,.select-keypad button:focus,.settings-card:focus,.settings-open:focus,.settings-back:focus{outline:3px solid #00d5ae;outline-offset:3px}
+.settings-open,.settings-back{border:1px solid #25947c;background:#005443;color:#79e5cb;border-radius:24px;padding:10px 18px;font-weight:800;letter-spacing:.1em}
+.settings-screen{position:absolute;z-index:30;inset:0;overflow:auto;padding:34px 5vw 28px;background:radial-gradient(ellipse at 50% 0%,#08715a 0,#00513f 52%,#003c31 100%)}
+.settings-header{display:flex;align-items:center;gap:22px;margin-bottom:22px}
+.settings-header h1{font-size:clamp(30px,3vw,48px);margin:4px 0}
+.settings-summary{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 24px}
+.settings-chip{border:1px solid #26836f;color:#7ee4cc;border-radius:30px;padding:10px 17px;font-size:12px;font-weight:800;letter-spacing:.1em}
+.settings-chip.selected{background:var(--ko-mint);color:#003d32}
+.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:1200px}
+.settings-card{display:flex;align-items:center;gap:18px;text-align:left;min-height:112px;padding:18px 22px;background:#004a3c;border:1px solid #237b69;border-radius:17px;color:#e9fff8}
+.settings-icon{display:grid;place-items:center;flex:0 0 54px;height:54px;border-radius:50%;background:#006b56;color:#78e6cd;font-size:25px}
+.settings-card span:nth-child(2){flex:1;min-width:0}
+.settings-card strong{display:block;font-size:clamp(18px,1.8vw,25px);margin-bottom:6px}
+.settings-card small{display:block;color:#b1d3c9;font-size:14px;line-height:1.4}
+.settings-card b{font-size:27px;color:#7de7ce}
+.settings-detail{max-width:1000px;margin-top:20px;padding:24px;background:#00483a;border:1px solid #267d6a;border-radius:18px}
+.settings-detail h2{font-size:30px;margin:18px 0 8px}
+.settings-detail p{font-size:17px;color:#b4d5cb;line-height:1.5}
+.settings-detail-row{padding:18px 0;border-bottom:1px solid #236e5e}
+.settings-detail-row strong{display:block;font-size:18px;margin-bottom:6px}
+.settings-detail-row small{color:#a9cfc3;font-size:14px}
+.settings-disclaimer{color:#92bdb0;font-size:12px;margin-top:24px;letter-spacing:.04em}
+@media(max-width:900px){.settings-grid{grid-template-columns:1fr}.settings-screen{padding:22px}.select-screen{grid-template-columns:1fr;overflow:auto}.select-hero{max-width:none}}
