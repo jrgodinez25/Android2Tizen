@@ -1,6 +1,6 @@
 # Karaoke TV MVP — Implementation Status
 
-**Development branch:** `feature/kara-okay-tizen-mvp`
+**Development branch:** `feature/kara-okay-tizen-parity`
 
 ## Implemented in source
 
@@ -8,6 +8,10 @@
 - [x] 1080p/16:9 interface
 - [x] Original demo catalog and lyrics
 - [x] Five-digit keypad and song search
+- [x] Keypad-first Select a Song landing screen
+- [x] Quick-pick song cards from original demo catalog
+- [x] Remote number-key entry synchronized with landing display
+- [x] Back key returns to song selection when not playing
 - [x] Song selection and reservation queue
 - [x] Queue removal and clear
 - [x] Lyric cue timeline
@@ -20,6 +24,8 @@
 
 ## Not yet implemented or verified
 
+- [ ] Compare selection and stage screens against user-provided KARA-OKAY 1.8.0 screenshots
+- [ ] Refine typography, focus movement and transitions against physical-TV captures
 - [ ] Build a signed WGT using a Samsung certificate
 - [ ] Install WGT through TizenBrew Installer on UA50CU8100GXXP
 - [ ] Verify first launch and runtime diagnostics on the TV
