@@ -10,6 +10,7 @@
 - [x] Five-digit keypad and song search
 - [x] Keypad-first Select a Song landing screen
 - [x] Quick-pick song cards from original demo catalog
+- [x] Landing-screen search by song number, title, artist and lyric-line text
 - [x] Remote number-key entry synchronized with landing display
 - [x] Back key returns to song selection when not playing
 - [x] Song selection and reservation queue
@@ -30,6 +31,7 @@
 - [ ] Install WGT through TizenBrew Installer on UA50CU8100GXXP
 - [ ] Verify first launch and runtime diagnostics on the TV
 - [ ] Verify USB/file-picker and supported audio codecs
+- [ ] Sorting modes (title, singer, number, newest) and A–Z/new-song filters
 - [ ] Persistent catalog and queue storage
 - [ ] Remote-phone controller and local network protocol
 - [ ] Authorized song catalog import
