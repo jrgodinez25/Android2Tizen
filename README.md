@@ -4,7 +4,7 @@ A clean-room Android-to-Tizen reconstruction workspace, currently implementing a
 
 ## Current project
 
-The first Tizen karaoke MVP is under review in [PR #1](https://github.com/jrgodinez25/Android2Tizen/pull/1). The parity investigation is isolated on [feature/kara-okay-tizen-parity](https://github.com/jrgodinez25/Android2Tizen/tree/feature/kara-okay-tizen-parity).
+The first Tizen karaoke MVP is under review in [PR #1](https://github.com/jrgodinez25/Android2Tizen/pull/1). The parity investigation is isolated on [feature/kara-okay-tizen-parity](https://github.com/jrgodinez25/Android2Tizen/tree/feature/kara-okay-tizen-parity). See the [upstream release reference](documentation/upstream-release-reference.md) for the 1.8.0/1.9.0/PC 1.3.0 feature and visual specification extracted from public release notes.
 
 Read the [APK 1.8.0 structural inspection](documentation/apk-1.8.0-deep-inspection.md), [Tizen parity architecture](documentation/tizen-parity-architecture.md), [feature inventory](documentation/feature-inventory.md), [MVP status](documentation/mvp-status.md), [device profile](documentation/device-profile.md), [initial technical assessment](documentation/kara-okay-1.8.0-assessment.md), and [full roadmap](documentation/roadmap.md).
 
